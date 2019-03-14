@@ -1,0 +1,14 @@
+# device            mountpoint     fstype
+fastboot            /fastboot      mtd      defaults        defaults
+bootargs            /bootargs      mtd      defaults        defaults
+recovery            /recovery      mtd      defaults        defaults
+baseparam           /baseparam     mtd      defaults        defaults
+logo                /logo          mtd      defaults        defaults
+fastplay            /fastplay      mtd      defaults        defaults
+misc                /misc          mtd      defaults        defaults
+kernel              /boot          mtd      defaults        defaults
+qbboot              /qbboot        mtd      defaults        defaults
+system              /system        ubifs    defaults        defaults
+userdata            /data          ubifs    defaults        defaults
+cache               /cache         ubifs    defaults        defaults
+/dev/block/sda1     /sdcard        auto     defaults        defaults

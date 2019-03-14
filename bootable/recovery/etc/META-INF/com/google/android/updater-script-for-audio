@@ -1,0 +1,8 @@
+ui_print("start......");
+set_progress("1");
+show_progress("1","20");
+ui_print("update audio......");
+mount("ext4", "EMMC", "/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/system", "/system");
+package_extract_dir("system", "/system");
+unmount("/system");
+ui_print("update ok ...");

@@ -1,0 +1,38 @@
+ui_print("start......");
+set_progress("1");
+show_progress("1","150");
+ui_print("update baseparam......");
+format("raw", "MTD", "baseparam", "0", "baseparam");
+package_extract_file("baseparam.img", "/tmp/baseparam.img");
+write_raw_image("/tmp/baseparam.img", "baseparam");
+delete("/tmp/baseparam.img");
+ui_print("update logo......");
+format("raw", "MTD", "logo", "0", "logo");
+package_extract_file("logo.img", "/tmp/logo.img");
+write_raw_image("/tmp/logo.img", "logo");
+delete("/tmp/logo.img");
+ui_print("update boot......");
+format("raw", "MTD", "kernel", "0", "kernel");
+package_extract_file("boot.img", "/tmp/boot.img");
+write_raw_image("/tmp/boot.img", "kernel");
+delete("/tmp/boot.img");
+ui_print("update system......");
+format("ubifs", "MTD", "system", "0", "/system");
+mount("ubifs", "MTD", "system", "/system");
+package_extract_dir("system", "/system");
+set_perm_recursive(0, 2000, 0755, 0755, "/system/bin");
+set_perm_recursive(0, 2000, 0755, 0755, "/system/xbin");
+set_perm_recursive(0, 2000, 0755, 0755, "/system/etc");
+ifelse(isuserversion(),
+    ui_print(" ----user version----- "),
+    ui_print(" --------- ");
+    set_perm(0, 2000, 04750, "/system/xbin/su");
+);
+ui_print("update userdata......");
+format("ubifs", "MTD", "userdata", "0", "/data");
+mount("ubifs", "MTD", "userdata", "/data");
+package_extract_dir("userdata", "/data");
+ui_print("update private......");
+format("ubifs", "MTD", "private", "0", "/private");
+ui_print("update securestore......");
+format("ubifs", "MTD", "securestore", "0", "/securestore");

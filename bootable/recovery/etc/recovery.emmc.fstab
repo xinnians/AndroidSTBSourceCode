@@ -1,0 +1,16 @@
+# device                                        mountpoint  fstype
+/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/fastboot   /fastboot   emmc    defaults        defaults
+/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/bootargs   /bootargs   emmc    defaults        defaults
+/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/recovery   /recovery   emmc    defaults        defaults
+/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/baseparam  /baseparam  emmc    defaults        defaults
+/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/panelparam /panelparam emmc    defaults        defaults
+/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/logo       /logo       emmc    defaults        defaults
+/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/kernel     /boot       emmc    defaults        defaults
+/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/dtb        /dtb        emmc    defaults        defaults
+/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/misc       /misc       emmc    defaults        defaults
+/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/qbboot     /qbboot     emmc    defaults        defaults
+/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/system     /system     ext4    defaults        defaults
+/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/userdata   /data       ext4    defaults        defaults
+/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/cache      /cache      ext4    defaults        defaults
+/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/backup      /backup      ext4    defaults        defaults
+/dev/block/sda1                                 /sdcard     auto    defaults        defaults

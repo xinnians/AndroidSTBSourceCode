@@ -1,0 +1,45 @@
+ui_print("start......");
+set_progress("1");
+show_progress("1","150");
+ui_print("update fastboot......");
+package_extract_file("fastboot.img", "/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/fastboot");
+ui_print("update bootargs......");
+package_extract_file("bootargs.img", "/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/bootargs");
+ui_print("update recovery......");
+package_extract_file("recovery.img", "/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/recovery");
+ui_print("update baseparam......");
+package_extract_file("baseparam.img", "/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/baseparam");
+ui_print("update fastplay......");
+#format("raw", "EMMC", "/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/fastplay", "0", "fastplay");
+#package_extract_file("fastplay.img", "/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/fastplay");
+ui_print("update logo......");
+package_extract_file("logo.img", "/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/logo");
+ui_print("update boot......");
+package_extract_file("boot.img", "/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/kernel");
+ui_print("update pq_param.....");
+package_extract_file("pq_param.img", "/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/pqparam");
+ui_print("update trustedcore......");
+package_extract_file("trustedcore.img", "/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/trustedcore");
+ui_print("update system......");
+format("ext4", "EMMC", "/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/system", "0", "/system");
+mount("ext4", "EMMC", "/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/system", "/system");
+package_extract_dir("system", "/system");
+set_perm_recursive(0, 2000, 0755, 0755, "/system/bin");
+set_perm_recursive(0, 2000, 0755, 0755, "/system/xbin");
+set_perm_recursive(0, 2000, 0755, 0755, "/system/etc");
+ifelse(isuserversion(),
+    ui_print(" ----user version----- "),
+    ui_print(" --------- ");
+    set_perm(0, 2000, 04750, "/system/xbin/su");
+);
+
+ui_print("update userdata......");
+format("ext4", "EMMC", "/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/userdata", "0", "/data");
+mount("ext4", "EMMC", "/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/userdata", "/data");
+package_extract_dir("userdata", "/data");
+delete("/data/property/persist.sys.firstboot.flag");
+unmount("/data");
+ui_print("update private......");
+format("ext4", "EMMC", "/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/private", "0", "/private");
+ui_print("update securestore......");
+format("ext4", "EMMC", "/dev/block/platform/soc/f9830000.himciv200.MMC/by-name/securestore", "0", "/securestore");
